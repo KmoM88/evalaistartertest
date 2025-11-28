@@ -1,0 +1,24 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: evalai-debug-runner
+  namespace: evalai-poc
+spec:
+  backoffLimit: 0
+  # ttlSecondsAfterFinished: 300 
+  template:
+    spec:
+      containers:
+      - name: debug-runner
+        image: ghcr.io/<TU_USUARIO>/<TU_REPO>:latest
+        
+        imagePullPolicy: Always
+        
+        envFrom:
+        - secretRef:
+            name: evalai-runner-secrets
+            
+        env:
+        - name: SAVE_DIR
+          value: "/tmp"
+      restartPolicy: Never
