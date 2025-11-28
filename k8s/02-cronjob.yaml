@@ -1,0 +1,23 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: evalai-remote-worker
+  namespace: evalai-poc
+spec:
+  schedule: "*/1 * * * *"
+  concurrencyPolicy: Allow
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: runner
+            image: tu-usuario/evalai-remote-runner:latest 
+            imagePullPolicy: Always
+            envFrom:
+            - secretRef:
+                name: evalai-runner-secrets
+            env:
+            - name: SAVE_DIR
+              value: "/tmp"
+          restartPolicy: OnFailure
