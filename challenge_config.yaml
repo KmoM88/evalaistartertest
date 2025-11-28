@@ -45,7 +45,7 @@ challenge_phases:
     is_public: True
     challenge: 1
     is_active: True
-    max_concurrent_submissions_allowed: 10
+    max_concurrent_submissions_allowed: 11
     allowed_email_ids: []
     disable_logs: False
     is_submission_public: True
