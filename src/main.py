@@ -7,7 +7,7 @@ from evaluate import evaluate
 
 # Logging
 logging.basicConfig(
-    level=logging.INFO,
+    level=logging.DEBUG,
     format='%(asctime)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
@@ -93,24 +93,26 @@ def main():
 
     evalai = EvalAIInterface(AUTH_TOKEN, API_SERVER, QUEUE_NAME, CHALLENGE_PK)
     
-    max_messages_per_run = 10
-    processed_count = 0
+    submission_queue = evalai.get_submission_from_queue()
+    logger.
+    # max_messages_per_run = 10
+    # processed_count = 0
 
-    logger.info("Starting cronjob for EvalAI challenge evaluation.")
+    # logger.info("Starting cronjob for EvalAI challenge evaluation.")
 
-    while processed_count < max_messages_per_run:
-        try:
-            message = evalai.get_message_from_sqs_queue()
-            if not message or 'body' not in message:
-                logger.info("Execution completed. No messages in queue.")
-                break
+    # while processed_count < max_messages_per_run:
+    #     try:
+    #         message = evalai.get_message_from_sqs_queue()
+    #         if not message or 'body' not in message:
+    #             logger.info("Execution completed. No messages in queue.")
+    #             break
             
-            process_message(evalai, message)
-            processed_count += 1
+    #         process_message(evalai, message)
+    #         processed_count += 1
             
-        except Exception as e:
-            logger.error(f"Error in main loop: {e}")
-            break
+    #     except Exception as e:
+    #         logger.error(f"Error in main loop: {e}")
+    #         break
 
     logger.info(f"Loop completed. Proccesed submissions: {processed_count}")
 

@@ -26,11 +26,11 @@ class EvalAIInterface:
                 logger.error(f"Server error: {response.text}")
             raise
 
-    def get_message_from_sqs_queue(self):
+    def get_submission_from_queue(self):
         endpoint = f"/api/jobs/challenge/queues/{self.queue_name}/"
         return self._make_request("GET", endpoint)
 
-    def delete_message_from_sqs_queue(self, receipt_handle):
+    def delete_message_from_queue(self, receipt_handle):
         endpoint = f"/api/jobs/queues/{self.queue_name}/"
         data = {"receipt_handle": receipt_handle}
         return self._make_request("POST", endpoint, data)
