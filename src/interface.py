@@ -33,6 +33,7 @@ class EvalAIInterface:
     def delete_message_from_queue(self, receipt_handle):
         endpoint = f"/api/jobs/queues/{self.queue_name}/"
         data = {"receipt_handle": receipt_handle}
+        logger.debug(f"Deleting message from queue with receipt_handle: {receipt_handle}")
         return self._make_request("POST", endpoint, data)
 
     def update_submission_status(self, submission_pk, status):

@@ -4,14 +4,13 @@ logger = logging.getLogger(__name__)
 
 def evaluate(user_submission_file, phase_codename, **kwargs):
     """
-    Realiza la evaluación (Mock por ahora).
+    Mock evaluation.
     """
     logger.info(f"Starting evaluation phase: {phase_codename}")
     logger.info(f"File: {user_submission_file}")
 
     output = {}
     
-    # Lógica Mock solicitada
     if phase_codename == "dev":
         logger.info("Evaluating for Dev Phase")
         output["result"] = [
@@ -21,6 +20,7 @@ def evaluate(user_submission_file, phase_codename, **kwargs):
                 "accuracies": {"Metric1": 90},
             },
         ]
+        logger.info("Completed evaluation for Dev Phase")
     elif phase_codename == "test":
         logger.info("Evaluating for Test Phase")
         output["result"] = [
@@ -35,6 +35,5 @@ def evaluate(user_submission_file, phase_codename, **kwargs):
                 "accuracies": {"Metric1": 50, "Metric2": 40},
             },
         ]
-    
-    logger.info("Completed evaluation for Test Phase")
+        logger.info("Completed evaluation for Test Phase")
     return output
